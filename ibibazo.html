@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="rw">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="RoadRules • Ibibazo - ibizamini 20 y'ibibazo by'umwihariko. Soma ibibazo n'ibisubizo byose by'ikizamini cya provisoir mu Rwanda.">
+  <title>Ibibazo • RoadRules • Amategeko y'Umuhanda</title>
+  
+  <!-- Early theme -->
+  <script>
+    (function() {
+      try {
+        const saved = localStorage.getItem('roadRulesTheme');
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const shouldBeDark = saved === 'dark' || (!saved && prefersDark);
+        if (shouldBeDark) document.documentElement.classList.add('dark');
+        else document.documentElement.classList.remove('dark');
+      } catch (e) {}
+    })();
+  </script>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="common.css">
+  <style>
+    .logo-font { font-family: 'Poppins', 'Inter', system-ui, sans-serif; }
+    .pro-grid { 
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 14px; 
+    }
+    .empty-state { grid-column: 1 / -1; }
+    .ikizamini-card {
+      width: 100%;
+      max-width: 780px;
+      margin: 0 auto;
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 20px;
+      padding: 18px 20px;
+      box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+      transition: all 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    .dark .ikizamini-card {
+      background: #0f172a;
+      border-color: #334155;
+      box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.2);
+    }
+    .ikizamini-card:hover {
+      border-color: #10b981;
+      box-shadow: 0 10px 15px -3px rgb(16 185 129 / 0.1);
+    }
+    .section-pro { font-size: 10px; letter-spacing: 2px; font-weight: 700; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-200 antialiased">
+  <!-- OFFICIAL TOPBAR -->
+  <div class="official-topbar hidden md:block text-white/90">
+    <div class="max-w-screen-2xl mx-auto px-6 lg:px-8 flex items-center justify-between h-7 text-[10px] font-medium tracking-[0.6px]">
+      <div class="flex items-center gap-x-2"><span class="font-semibold">REPUBLIC OF RWANDA</span> <span class="opacity-60">•</span> <span class="opacity-80">Road Safety Education Initiative</span></div>
+      <div class="flex items-center gap-x-4 text-[9.5px] opacity-80"><span>+250 788 762 976</span></div>
+    </div>
+  </div>
+  
+  <!-- NAV -->
+  <nav class="sticky top-0 z-50 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 nav-elevated">
+    <div class="max-w-screen-2xl mx-auto">
+      <div class="px-4 sm:px-5 md:px-6 lg:px-8">
+        <div class="flex h-[70px] sm:h-[78px] items-center justify-between">
+          <a href="index.html" class="flex items-center gap-x-3 group">
+            <div class="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-700 to-blue-800 text-white shadow-md ring-1 ring-blue-900/30 group-hover:scale-[1.03] transition-transform"><i class="fa-solid fa-road text-xl sm:text-2xl"></i></div>
+            <div class="leading-none"><span class="logo-font text-[23px] sm:text-[27px] font-semibold tracking-[-1.2px] text-slate-900 dark:text-white">RoadRules</span><span class="block -mt-[1px] text-[8px] sm:text-[9.5px] font-semibold tracking-[1.5px] text-blue-700 dark:text-blue-400">AMATEGEKO Y'UMUHANDA</span></div>
+          </a>
+
+          <div class="hidden md:flex items-center gap-x-1 text-[14.5px] font-medium">
+            <a href="index.html" class="nav-link nav-pill px-5 py-2 text-slate-700 dark:text-slate-300 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800">Ahabanza</a>
+            <a href="imyitozo.html" class="nav-link nav-pill px-5 py-2 text-slate-700 dark:text-slate-300 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800">Imyitozo</a>
+            <a href="ibibazo.html" class="nav-link nav-pill active px-5 py-2 text-slate-700 dark:text-slate-300 rounded-full">Ibibazo</a>
+            <a href="ifitabuguzi.html" class="nav-link nav-pill px-5 py-2 text-slate-700 dark:text-slate-300 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800">Ifatabuguzi</a>
+          </div>
+
+          <div class="flex items-center gap-x-2.5 flex-shrink-0">
+            <button onclick="toggleTheme()" id="theme-toggle" class="flex h-10 w-10 items-center justify-center rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-white transition-all hover:border-slate-300 active:scale-[0.96]" aria-label="Toggle theme"><i id="theme-icon" class="fa-solid fa-moon text-base"></i></button>
+            <div id="desktop-auth-area" class="hidden sm:flex items-center gap-x-2 pl-2 border-l border-slate-200 dark:border-slate-700">
+              <a href="login.html" onclick="setReturnTo()" class="polished-btn px-5 py-[9px] text-sm font-semibold rounded-2xl border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition inline-flex items-center">Injira</a>
+              <a href="signup.html" onclick="setReturnTo()" class="polished-btn px-5 py-[9px] text-sm font-semibold rounded-2xl bg-blue-700 hover:bg-blue-800 text-white shadow-sm transition inline-flex items-center">Iyandikishe</a>
+            </div>
+            <button onclick="toggleMobileMenu()" id="mobile-menu-button" class="md:hidden flex h-10 w-10 items-center justify-center rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white transition" aria-label="Open menu"><i class="fa-solid fa-bars text-lg"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="hidden md:hidden fixed inset-0 z-[100000] bg-black bg-opacity-75" onclick="toggleMobileMenu()">
+      <div onclick="event.stopImmediatePropagation()" class="absolute right-0 top-0 bottom-0 w-[82%] max-w-[320px] bg-white dark:bg-slate-900 shadow-2xl border-l border-slate-200 dark:border-slate-700 p-6 overflow-y-auto">
+        <div class="flex items-center justify-between mb-8">
+          <div class="flex items-center gap-x-3"><div class="h-9 w-9 bg-blue-700 rounded-2xl flex items-center justify-center text-white"><i class="fa-solid fa-road"></i></div><span class="logo-font text-2xl font-semibold tracking-tighter">RoadRules</span></div>
+          <button onclick="toggleMobileMenu()" class="text-3xl text-slate-400 hover:text-slate-600">×</button>
+        </div>
+        <div class="space-y-1 text-[15.5px] font-medium">
+          <a href="index.html" class="block px-4 py-3.5 rounded-2xl text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">Ahabanza</a>
+          <a href="imyitozo.html" class="block px-4 py-3.5 rounded-2xl text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">Imyitozo</a>
+          <a href="ibibazo.html" class="block px-4 py-3.5 rounded-2xl bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-blue-300 font-semibold">Ibibazo</a>
+          <a href="ifitabuguzi.html" class="block px-4 py-3.5 rounded-2xl text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">Ifatabuguzi</a>
+        </div>
+        <div class="my-7 border-t border-slate-200 dark:border-slate-700"></div>
+        <div id="mobile-auth-area" class="space-y-3">
+          <a href="login.html" onclick="setReturnTo(); toggleMobileMenu()" class="block w-full py-3.5 rounded-2xl border border-slate-300 dark:border-slate-600 text-sm font-semibold text-center">Injira (Login)</a>
+          <a href="signup.html" onclick="setReturnTo(); toggleMobileMenu()" class="block w-full py-3.5 rounded-2xl bg-blue-700 text-white text-sm font-semibold text-center">Iyandikishe (Sign Up)</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- PREMIUM IBIBAZO REBUILT UI -->
+  <main class="max-w-screen-2xl mx-auto px-4 md:px-6 lg:px-8 py-8 md:py-10">
+    <div class="max-w-4xl mx-auto">
+      
+      <!-- HERO / HEADER -->
+      <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-y-4 mb-7">
+        <div>
+          <div class="inline-flex items-center gap-2.5 rounded-3xl bg-gradient-to-r from-emerald-600 to-teal-600 px-4 py-1 text-white text-xs font-extrabold tracking-[1.5px] shadow-sm mb-3">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <span>IBIZAMINI 20 • IBIBAZO 399</span>
+          </div>
+          <h1 class="text-4xl md:text-[42px] font-semibold tracking-tighter leading-none">Ibibazo n’Ibisubizo by’Ibizamini</h1>
+          <p class="mt-3 max-w-md text-[15px] text-slate-600 dark:text-slate-400">Reba ibizamini byakozwe n'ibisubizo byabyo. Buri kizamini gifite ibibazo 20</p>
+        </div>
+        
+        <div class="flex items-center gap-4">
+          <div class="text-right">
+            <div id="total-q-stat" class="text-[42px] font-semibold tabular-nums tracking-tighter text-emerald-600">399</div>
+            <div class="text-xs uppercase tracking-[1px] text-slate-500 -mt-1">IBIBAZO BYOSE</div>
+          </div>
+          <div class="h-11 w-px bg-slate-200 dark:bg-slate-800"></div>
+          <div>
+            <div class="flex -space-x-1">
+              <div class="w-7 h-7 rounded-xl bg-blue-600 ring-2 ring-white dark:ring-slate-900 flex items-center justify-center text-[10px] text-white"><i class="fa-solid fa-car"></i></div>
+              <div class="w-7 h-7 rounded-xl bg-emerald-600 ring-2 ring-white dark:ring-slate-900 flex items-center justify-center text-[10px] text-white"><i class="fa-solid fa-road"></i></div>
+              <div class="w-7 h-7 rounded-xl bg-amber-500 ring-2 ring-white dark:ring-slate-900 flex items-center justify-center text-[10px] text-white"><i class="fa-solid fa-tachometer-alt"></i></div>
+            </div>
+            <div class="text-xs mt-1 text-slate-500 font-medium">Reba ibizamini 20 byakozwe</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROGRESS + QUICK ACTIONS -->
+      <div class="mb-6 rounded-3xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-4 md:p-5 flex flex-col md:flex-row gap-4 md:items-center md:justify-between">
+        <div class="flex items-center gap-x-4">
+          <div>
+            <div class="text-xs font-semibold tracking-widest text-slate-500">IBYO UMAZE GUSOMA</div>
+            <div class="flex items-baseline gap-2">
+              <div id="progress-stat" class="text-3xl font-semibold tabular-nums">0/20</div>
+              <div class="text-sm text-emerald-600 font-medium">ibizamini</div>
+            </div>
+          </div>
+          <div class="w-28 md:w-36">
+            <div class="h-2.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+              <div id="progress-bar" class="h-2.5 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-full transition-all" style="width:0%"></div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="flex items-center gap-2 flex-wrap">
+            <button onclick="openRandomUnlocked()" class="flex items-center gap-2 px-4 h-9 text-sm font-semibold rounded-2xl border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 active:scale-[0.985] transition">
+            <i class="fa-solid fa-random"></i> <span>Tombora ikizamini</span>
+          </button>
+          <button onclick="resetAllProgress()" class="flex items-center gap-2 px-4 h-9 text-sm font-semibold rounded-2xl border border-slate-300 dark:border-slate-700 hover:bg-rose-50 dark:hover:bg-rose-950 text-rose-600 active:scale-[0.985] transition">
+            <i class="fa-solid fa-undo"></i> <span>Tangira bushya</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- TOOLBAR: FILTERS + SORT -->
+      <div class="flex flex-col md:flex-row gap-3 mb-4 items-stretch md:items-center">
+        <div class="flex items-center gap-2 flex-wrap">
+          <div onclick="setFilter('all')" id="filter-all" class="filter-chip active">Byose Hamwe</div>
+          <div onclick="setFilter('unlocked')" id="filter-unlocked" class="filter-chip">Ibifunguye</div>
+          <div onclick="setFilter('done')" id="filter-done" class="filter-chip">Ibyarangiye</div>
+        </div>
+      </div>
+
+      <!-- THE PROFESSIONAL ICONIZED GRID -->
+      <div id="isuzuma-pro-grid" class="pro-grid mb-4">
+        <!-- Populated dynamically by JS with 20 stunning cards -->
+      </div>
+
+      <div class="text-center text-[10px] text-slate-400 tracking-widest mt-2 mb-8">PERIME.RW — Gutsindisha abanyeshuri bose bakora ikizamini cya provisoir mu Rwanda</div>
+    </div>
+  </main>
+
+  <!-- UPGRADED IKIZAMINI MODAL -->
+  <div id="isuzuma-modal" onclick="if (event.target.id==='isuzuma-modal') closeIsuzumaModal()" class="hidden fixed inset-0 z-[95] bg-black/75 items-center justify-center p-3 md:p-5">
+    <div onclick="event.stopImmediatePropagation()" class="bg-white dark:bg-slate-900 w-full max-w-[980px] rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-700 flex flex-col max-h-[94vh] overflow-hidden">
+      
+      <!-- Modal Header -->
+      <div class="px-4 py-3 sm:px-5 sm:py-4 border-b border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1.5 sm:gap-4 bg-slate-50 dark:bg-slate-950/70">
+        <div class="flex items-center gap-x-2 sm:gap-x-3 min-w-0">
+          <div id="modal-icon" class="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl flex items-center justify-center text-lg sm:text-xl flex-shrink-0"></div>
+          <div class="min-w-0">
+            <div id="modal-title" class="font-semibold text-[15px] sm:text-xl tracking-tight leading-tight"></div>
+            <div id="modal-subtitle" class="text-[10px] sm:text-xs text-slate-500 font-medium"></div>
+          </div>
+        </div>
+        
+        <div class="flex items-center gap-1 sm:gap-2 sm:ml-auto flex-wrap">
+          <button onclick="toggleAnswersVisibility()" id="answers-toggle-btn"
+                  class="px-2 sm:px-3 py-0.5 sm:py-1 text-[10px] sm:text-xs font-semibold rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-white dark:hover:bg-slate-800 flex items-center gap-1 sm:gap-1.5 active:scale-[0.985] transition"
+                  aria-label="Toggle answers visibility" title="Toggle answers">
+            <i class="fa-solid fa-eye-slash"></i> <span id="toggle-text">Hisha ibisubizo</span>
+          </button>
+          <button onclick="pickRandomInCurrent()" class="px-2 sm:px-3 py-0.5 sm:py-1 text-[10px] sm:text-xs font-semibold rounded-xl bg-emerald-600 text-white flex items-center gap-1 sm:gap-1.5 hover:bg-emerald-700 active:scale-95 transition"
+                  aria-label="Pick random question" title="Random">
+            <i class="fa-solid fa-random"></i> <span id="toggle-text-random">Tombora ikibazo</span>
+          </button>
+          <button onclick="closeIsuzumaModal()" class="text-2xl sm:text-3xl leading-none px-1.5 sm:px-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300" aria-label="Close" title="Close">×</button>
+        </div>
+      </div>
+
+      <!-- Questions Container -->
+      <div id="modal-questions-container" class="flex-1 overflow-auto p-4 md:p-5 space-y-3 custom-scroll bg-slate-50 dark:bg-slate-950" style="max-height: 58vh;">
+        <!-- JS populated refined question cards -->
+      </div>
+
+      <div class="px-5 py-4 border-t border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900 flex gap-3 items-center">
+        <button onclick="closeIsuzumaModal()" class="flex-1 py-2.5 rounded-2xl border border-slate-300 dark:border-slate-600 text-sm font-semibold hover:bg-slate-50 dark:hover:bg-slate-800 transition">Funga</button>
+        <button onclick="markGroupComplete()" class="flex-1 py-2.5 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold flex items-center justify-center gap-2">
+          <i class="fa-solid fa-check-double"></i> <span>Narangije kubisoma</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER (polished) -->
+  <footer class="border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
+    <div class="max-w-screen-2xl mx-auto px-6 lg:px-8">
+      <div class="py-10 md:py-12 grid grid-cols-2 md:grid-cols-5 gap-y-10 gap-x-6 text-sm">
+        <div class="col-span-2 md:col-span-1">
+          <div class="flex items-center gap-x-3">
+            <div class="flex h-9 w-9 items-center justify-center rounded-2xl bg-blue-600 text-white"><i class="fa-solid fa-road"></i></div>
+            <span class="logo-font font-semibold text-2xl tracking-tighter">RoadRules</span>
+          </div>
+          <div class="mt-3 text-xs text-slate-500 dark:text-slate-400 pr-3">Urubuga rwambere mugutsindisha abanyeshuri bakora ikizamini cya provisoir</div>
+        </div>
+        <div>
+          <div class="font-semibold mb-2.5 text-xs tracking-widest text-slate-500">PLATFORM</div>
+          <div class="space-y-1.5 text-[13.5px]">
+            <a href="index.html" class="block footer-link">Ahabanza</a>
+            <a href="imyitozo.html" class="block footer-link">Imyitozo</a>
+            <a href="ibibazo.html" class="block footer-link">Ibibazo</a>
+            <a href="ifitabuguzi.html" class="block footer-link">Ifatabuguzi</a>
+          </div>
+        </div>
+        <div>
+          <div class="font-semibold mb-2.5 text-xs tracking-widest text-slate-500">SUPPORT</div>
+          <div class="space-y-1.5 text-[13.5px]">
+            <a href="#" class="block footer-link">Help Center</a>
+            <a href="#" class="block footer-link">Report Issue</a>
+          </div>
+        </div>
+        <div>
+          <div class="font-semibold mb-2.5 text-xs tracking-widest text-slate-500">LEGAL</div>
+          <div class="space-y-1.5 text-[13.5px]">
+            <a href="#" class="block footer-link">Privacy Policy</a>
+            <a href="#" class="block footer-link">Terms of Service</a>
+          </div>
+        </div>
+        <div class="col-span-2 md:col-span-1">
+          <div class="font-semibold mb-2.5 text-xs tracking-widest text-slate-500">CONNECT</div>
+          <div class="flex items-center gap-x-4 text-lg">
+            <a href="https://www.facebook.com/perime.rw250" class="hover:text-blue-600 transition"><i class="fa-brands fa-facebook"></i></a>
+            <a href="https://www.youtube.com/@perime.rw250" class="hover:text-blue-600 transition"><i class="fa-brands fa-youtube"></i></a>
+            <a href="https://www.tiktok.com/@perime.rw250" class="hover:text-blue-600 transition"><i class="fa-brands fa-tiktok"></i></a>
+          </div>
+          <div class="mt-4 text-xs text-slate-500">© 2026 RoadRules Ltd. • Kigali, Rwanda</div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="auth.js"></script>
+  <script src="questions.js"></script>
+  <script src="common.js"></script>
+  <script>
+    // ========== NEW PROFESSIONAL IBIBAZO REBUILT 2026 ==========
+    let isuzumaGroups = [];
+    let currentGroupIndex = -1;
+    let currentGroupQuestions = [];
+    let currentGroupFiltered = [];
+    let answersVisible = true;
+    let currentFilter = 'all';
+    let groupMeta = [];
+
+    // 20 Professional curated meta entries - highly edited, iconized, distinct
+    function initGroupMeta() {
+      groupMeta = [
+        { icon: 'fa-car', bg: 'bg-blue-600', ring: 'ring-blue-200 dark:ring-blue-900', accent: 'blue', tags: ['General', 'Documents'], focus: 'Ibinyabiziga n\'Ibikenewe', diff: 'Ibanje', time: 'iminota 16 yo gusoma' },
+        { icon: 'fa-road', bg: 'bg-emerald-600', ring: 'ring-emerald-200 dark:ring-emerald-900', accent: 'emerald', tags: ['Markings', 'Lanes'], focus: 'Imirongo y\'Umuhanda', diff: 'Ibanje', time: 'iminota 17 yo gusoma' },
+        { icon: 'fa-tachometer-alt', bg: 'bg-rose-600', ring: 'ring-rose-200 dark:ring-rose-900', accent: 'rose', tags: ['Speed', 'Limits'], focus: 'Umuvuduko n\'Ibisabwa', diff: 'Icyiciro 2', time: 'iminota 15 yo gusoma' },
+        { icon: 'fa-parking', bg: 'bg-amber-600', ring: 'ring-amber-200 dark:ring-amber-900', accent: 'amber', tags: ['Parking', 'Stop'], focus: 'Guhagarara mu Muhando', diff: 'Ibanje', time: 'iminota 18 yo gusoma' },
+        { icon: 'fa-exchange-alt', bg: 'bg-violet-600', ring: 'ring-violet-200 dark:ring-violet-900', accent: 'violet', tags: ['Overtake', 'Priority'], focus: 'Kunyuranaho & Gusimbuka', diff: 'Icyiciro 2', time: 'iminota 19 yo gusoma' },
+        { icon: 'fa-exclamation-triangle', bg: 'bg-orange-600', ring: 'ring-orange-200 dark:ring-orange-900', accent: 'orange', tags: ['Warning', 'Signs'], focus: 'Ibimenyetso by\'Iburira', diff: 'Ibanje', time: 'iminota 15 yo gusoma' },
+        { icon: 'fa-traffic-light', bg: 'bg-sky-600', ring: 'ring-sky-200 dark:ring-sky-900', accent: 'sky', tags: ['Signals', 'Lights'], focus: 'Amatara n\'Ibimenyetso', diff: 'Icyiciro 2', time: 'iminota 16 yo gusoma' },
+        { icon: 'fa-walking', bg: 'bg-teal-600', ring: 'ring-teal-200 dark:ring-teal-900', accent: 'teal', tags: ['Pedestrians', 'Safety'], focus: 'Abanyamaguru n\'Abana', diff: 'Ibanje', time: 'iminota 17 yo gusoma' },
+        { icon: 'fa-truck', bg: 'bg-indigo-600', ring: 'ring-indigo-200 dark:ring-indigo-900', accent: 'indigo', tags: ['Heavy', 'Trailers'], focus: 'Ibinyabiziga binini', diff: 'Icyiciro 2', time: 'iminota 18 yo gusoma' },
+        { icon: 'fa-motorcycle', bg: 'bg-lime-600', ring: 'ring-lime-200 dark:ring-lime-900', accent: 'lime', tags: ['Motorcycles', 'Velomoteri'], focus: 'Amagare n\'Imipira', diff: 'Ibanje', time: 'iminota 14 yo gusoma' },
+        { icon: 'fa-moon', bg: 'bg-slate-700', ring: 'ring-slate-300 dark:ring-slate-600', accent: 'slate', tags: ['Night', 'Visibility'], focus: 'Amatara y\'Umuhondo', diff: 'Icyiciro 2', time: 'iminota 16 yo gusoma' },
+        { icon: 'fa-file-alt', bg: 'bg-cyan-600', ring: 'ring-cyan-200 dark:ring-cyan-900', accent: 'cyan', tags: ['License', 'Docs'], focus: 'Ibikoresho n\'Uruhande', diff: 'Ibanje', time: 'iminota 15 yo gusoma' },
+        { icon: 'fa-cloud-rain', bg: 'bg-blue-500', ring: 'ring-blue-200 dark:ring-blue-900', accent: 'blue', tags: ['Weather', 'Road'], focus: 'Imihango n\'Imvura', diff: 'Icyiciro 2', time: 'iminota 17 yo gusoma' },
+        { icon: 'fa-globe', bg: 'bg-emerald-500', ring: 'ring-emerald-200 dark:ring-emerald-900', accent: 'emerald', tags: ['Roundabout', 'Inter'], focus: 'Ibisima n\'Ibisabwa', diff: 'Ibanje', time: 'iminota 18 yo gusoma' },
+        { icon: 'fa-first-aid', bg: 'bg-red-600', ring: 'ring-red-200 dark:ring-red-900', accent: 'red', tags: ['Emergency', 'First Aid'], focus: 'Ubutabazi n\'Ibyago', diff: 'Icyiciro 2', time: 'iminota 14 yo gusoma' },
+        { icon: 'fa-user-shield', bg: 'bg-purple-600', ring: 'ring-purple-200 dark:ring-purple-900', accent: 'purple', tags: ['Conduct', 'Ethics'], focus: 'Imyitwarire y\'Umuyobozi', diff: 'Ibanje', time: 'iminota 16 yo gusoma' },
+        { icon: 'fa-balance-scale', bg: 'bg-amber-500', ring: 'ring-amber-200 dark:ring-amber-900', accent: 'amber', tags: ['Rules', 'Law'], focus: 'Amategeko y\'Umuhanda', diff: 'Icyiciro 2', time: 'iminota 19 yo gusoma' },
+        { icon: 'fa-map-signs', bg: 'bg-teal-500', ring: 'ring-teal-200 dark:ring-teal-900', accent: 'teal', tags: ['Signs', 'Direction'], focus: 'Ibimenyetso by\'Inzira', diff: 'Ibanje', time: 'iminota 15 yo gusoma' },
+        { icon: 'fa-leaf', bg: 'bg-green-600', ring: 'ring-green-200 dark:ring-green-900', accent: 'green', tags: ['Eco', 'Efficiency'], focus: 'Gutwara mu buryo bwa Eco', diff: 'Icyiciro 2', time: 'iminota 13 yo gusoma' },
+        { icon: 'fa-trophy', bg: 'bg-yellow-600', ring: 'ring-yellow-200 dark:ring-yellow-900', accent: 'yellow', tags: ['Review', 'Mixed'], focus: 'Ikizamini ryo Gusubira', diff: 'Icyiciro 2', time: 'iminota 20 yo gusoma' }
+      ];
+    }
+
+    // Deterministic shuffle (unchanged core logic)
+    function mulberry32(seed) {
+      return function () {
+        let t = seed += 0x6D2B79F5;
+        t = Math.imul(t ^ t >>> 15, t | 1);
+        t ^= t + Math.imul(t ^ t >>> 7, t | 61);
+        return ((t ^ t >>> 14) >>> 0) / 4294967296;
+      };
+    }
+    function seededShuffle(arr, seed) {
+      const rng = mulberry32(seed);
+      const a = arr.slice();
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(rng() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    function buildIsuzumaGroups() {
+      let master = (window.RoadRulesQuestions || []).slice().sort((a, b) => (a.id || 0) - (b.id || 0));
+      master = seededShuffle(master, 20260522);
+      isuzumaGroups = [];
+      const size = 20;
+      for (let g = 0; g < 20; g++) {
+        isuzumaGroups.push(master.slice(g * size, g * size + size));
+      }
+    }
+
+    // Progress helpers (localStorage)
+    function getProgress() {
+      try { return JSON.parse(localStorage.getItem('ibibazoProgress') || '{}'); } catch { return {}; }
+    }
+    function saveProgress(p) { localStorage.setItem('ibibazoProgress', JSON.stringify(p)); }
+    function getGroupProgress(gi) {
+      const p = getProgress();
+      return p[gi] || 0;
+    }
+    function setGroupProgress(gi, pct) {
+      const p = getProgress();
+      p[gi] = Math.max(0, Math.min(100, Math.round(pct)));
+      saveProgress(p);
+      updateGlobalProgress();
+    }
+    function markGroupViewed(gi) {
+      const cur = getGroupProgress(gi);
+      if (cur < 45) setGroupProgress(gi, 45);
+    }
+    function setGroupComplete(gi) {
+      setGroupProgress(gi, 100);
+    }
+    function updateGlobalProgress() {
+      const p = getProgress();
+      let done = 0, sum = 0;
+      for (let i = 0; i < 20; i++) {
+        const val = p[i] || 0;
+        sum += val;
+        if (val >= 95) done++;
+      }
+      const avg = Math.round(sum / 20);
+      const stat = document.getElementById('progress-stat');
+      const bar = document.getElementById('progress-bar');
+      if (stat) stat.textContent = `${done}/20`;
+      if (bar) bar.style.width = avg + '%';
+    }
+    async function resetAllProgress() {
+      if (!confirm("Urashaka gusiba ibyo wasomye n'amateka y'ibizamini byose? Iyi gikorwa ntigisubirwa.")) return;
+      
+      // Clear local progress
+      localStorage.removeItem('ibibazoProgress');
+      
+      // Also delete exam history from the server (no admin password needed)
+      try {
+        const user = JSON.parse(localStorage.getItem('roadRulesUser') || 'null');
+        if (user && user.phone && window.RoadRulesAuth && window.RoadRulesAuth.refreshMyData) {
+          // Use RoadRulesAuth namespace to call the RPC through available methods
+          // We'll use the sbRpc helper from auth.js directly for this user RPC
+          const raw = localStorage.getItem('roadRulesUser');
+          const u = raw ? JSON.parse(raw) : null;
+          if (u && u.phone) {
+            await window.RoadRulesAuth.refreshMyData();
+            // Delete exam history via direct RPC call using sbRpc pattern
+            // roadrules_delete_exam_history is a user-facing RPC, so we call it directly
+            const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpwbHpzZ3N5enhqcHZld3RqeWdkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA5NTYyMTEsImV4cCI6MjA5NjUzMjIxMX0.WCpHnVfqmguQcD3AI_ryqx-njCqXIKoS3fz3sNCjkfE';
+            const RPC = 'https://zplzsgsyzxjpvewtjygd.supabase.co/rest/v1/rpc';
+            const HDR = { apikey: SUPABASE_ANON, Authorization: `Bearer ${SUPABASE_ANON}`, 'Content-Type': 'application/json', Prefer: 'return=representation' };
+            const res = await fetch(`${RPC}/roadrules_delete_exam_history`, {
+              method: 'POST',
+              headers: HDR,
+              body: JSON.stringify({ p_phone: u.phone })
+            });
+          }
+        }
+      } catch (e) {
+        console.warn('[Reset] Could not delete exam history from server:', e.message);
+      }
+      
+      filterAndRenderGroups();
+      updateGlobalProgress();
+    }
+
+    // Render the beautiful professional cards
+    function renderIsuzumaProGrid(filteredGroups = null) {
+      const grid = document.getElementById('isuzuma-pro-grid');
+      if (!grid) return;
+      grid.innerHTML = '';
+
+      const access = (window.RoadRulesAccess && window.RoadRulesAccess.getMaxExamsAllowed) ? window.RoadRulesAccess.getMaxExamsAllowed() : 5;
+      const allowed = Math.min(access, 20);
+      const progressData = getProgress();
+
+      // Always work with indices for robustness (professional codebase)
+      let indicesToShow = [];
+      if (filteredGroups) {
+        // map back filtered group refs to indices
+        indicesToShow = filteredGroups.map(g => isuzumaGroups.indexOf(g)).filter(i => i >= 0);
+      } else {
+        indicesToShow = Array.from({length: 20}, (_, i) => i);
+      }
+
+      // Show empty state for "done" filter
+      if (currentFilter === 'done' && indicesToShow.length === 0) {
+        grid.innerHTML = `<div class="p-12 text-center">
+          <div class="mx-auto w-16 h-16 rounded-2xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center mb-4">
+            <i class="fa-solid fa-check-circle text-3xl text-slate-400"></i>
+          </div>
+          <div class="text-lg font-semibold text-slate-700 dark:text-slate-200 mb-2">Nobwoko umunyeshuri ni ugira</div>
+          <div class="text-sm text-slate-500 dark:text-slate-400">Nta kizamini kirarangizwe kunde. Reka kora ikizamini kiri kugira!</div>
+        </div>`;
+        return;
+      }
+
+      // Show empty state for "unlocked" filter
+      if (currentFilter === 'unlocked' && indicesToShow.length === 0) {
+        grid.innerHTML = `<div class="p-12 text-center">
+          <div class="mx-auto w-16 h-16 rounded-2xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center mb-4">
+            <i class="fa-solid fa-lock text-3xl text-slate-400"></i>
+          </div>
+          <div class="text-lg font-semibold text-slate-700 dark:text-slate-200 mb-2">Nta kizamini kifunguye</div>
+          <div class="text-sm text-slate-500 dark:text-slate-400">Kugira ikizamini kifunguye, rebesha ifatabuguzi.</div>
+        </div>`;
+        return;
+      }
+
+      indicesToShow.forEach(realGi => {
+        const group = isuzumaGroups[realGi];
+        const meta = groupMeta[realGi] || groupMeta[0];
+        const num = realGi + 1;
+        const count = group.length;
+        const pct = progressData[realGi] || 0;
+        const isLocked = realGi >= allowed;
+        const isDone = pct >= 95;
+
+        const card = document.createElement('div');
+        card.className = `ikizamini-card group cursor-pointer flex flex-col md:flex-row gap-4 ${isLocked ? 'opacity-80' : ''}`;
+
+        const statusBadge = isLocked 
+          ? `<span class="px-2.5 py-0.5 text-[10px] font-bold rounded-full bg-amber-100 dark:bg-amber-900 text-amber-700 dark:text-amber-300">LOCKED</span>`
+          : (isDone ? `<span class="px-2.5 py-0.5 text-[10px] font-bold rounded-full bg-emerald-100 dark:bg-emerald-900 text-emerald-600 dark:text-emerald-300 flex items-center gap-1"><i class="fa-solid fa-check text-xs"></i> Done</span>` : '');
+
+        let html = `
+          <!-- Left: Icon + Number -->
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-2xl ${meta.bg} text-white flex-shrink-0 flex items-center justify-center text-2xl shadow-sm">
+              <i class="fa-solid ${meta.icon}"></i>
+            </div>
+            <div>
+              <div class="text-xs font-extrabold tracking-[1.2px] text-slate-500">IKIZAMINI CYA ${num}</div>
+               <div class="text-3xl font-bold tabular-nums text-slate-900 dark:text-white leading-none mt-0.5">${count}</div>
+               <div class="text-[10px] text-slate-400 -mt-0.5">ibibazo ${count}</div>
+            </div>
+          </div>
+
+          <!-- Middle: Title + Tags -->
+          <div class="flex-1 min-w-0 pt-1 md:pt-0">
+            <div class="font-semibold text-[15px] leading-tight text-slate-800 dark:text-slate-100">${meta.focus}</div>
+            <div class="flex flex-wrap gap-1 mt-2">
+              ${meta.tags.map(t => `<span class="text-[10px] px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-medium">${t}</span>`).join('')}
+            </div>
+            <div class="text-xs text-slate-500 mt-2 flex items-center gap-1">
+              <i class="fa-regular fa-clock text-[10px]"></i> ${meta.time}
+            </div>
+          </div>
+
+          <!-- Right: Progress + Action -->
+          <div class="flex-shrink-0 w-full md:w-44 flex flex-col gap-2 pt-2 md:pt-0 border-t md:border-t-0 border-slate-100 dark:border-slate-800 md:pl-4">
+            <div class="flex items-center justify-between text-xs">
+              <span class="font-medium text-emerald-600">${pct}%</span>
+              ${statusBadge}
+            </div>
+
+            <div class="h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+              <div class="h-2 bg-gradient-to-r from-emerald-500 to-teal-500 transition-all" style="width:${pct}%"></div>
+            </div>
+
+            <div class="mt-0.5">
+${isLocked 
+                 ? `<button onclick="event.stopImmediatePropagation(); showLockedGroupPrompt(${num})" class="w-full text-xs font-semibold py-2 rounded-2xl bg-amber-100 dark:bg-amber-900 text-amber-700 dark:text-amber-300 hover:bg-amber-200 active:scale-[0.985]">Fungura (Upgrade)</button>` 
+                 : `<button class="w-full text-sm font-extrabold py-2 rounded-2xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 group-hover:bg-emerald-600 group-hover:text-white dark:group-hover:bg-emerald-500 transition active:scale-[0.985]">${isDone ? 'Resoma' : 'Soma ibibazo'}</button>`}
+            </div>
+          </div>
+        `;
+
+        card.innerHTML = html;
+
+        if (isLocked) {
+          card.onclick = () => showLockedGroupPrompt(num);
+        } else {
+          card.onclick = () => openIsuzumaPro(realGi);
+        }
+        grid.appendChild(card);
+      });
+    }
+
+    function filterAndRenderGroups() {
+      const progressData = getProgress();
+      const access = (window.RoadRulesAccess && window.RoadRulesAccess.getMaxExamsAllowed) ? window.RoadRulesAccess.getMaxExamsAllowed() : 5;
+
+      let list = isuzumaGroups.map((g, i) => ({ group: g, idx: i }));
+
+      // Apply filter
+      if (currentFilter === 'unlocked') {
+        list = list.filter(item => item.idx < access);
+      } else if (currentFilter === 'done') {
+        list = list.filter(item => (progressData[item.idx] || 0) >= 95);
+      }
+
+      // Sort by index
+      list.sort((a, b) => a.idx - b.idx);
+
+      renderIsuzumaProGrid(list.map(l => l.group));
+    }
+
+    function setFilter(f) {
+      currentFilter = f;
+      document.querySelectorAll('.filter-chip').forEach(el => el.classList.remove('active'));
+      const activeEl = document.getElementById('filter-' + f);
+      if (activeEl) activeEl.classList.add('active');
+      filterAndRenderGroups();
+    }
+
+    // Open the professional modal
+    function openIsuzumaPro(gi) {
+      if (!localStorage.getItem('roadRulesUser')) { sessionStorage.setItem('roadRulesReturnTo', window.location.href); window.location.href = 'login.html'; return; }
+
+      currentGroupIndex = gi;
+      currentGroupQuestions = (isuzumaGroups[gi] || []).slice();
+      currentGroupFiltered = currentGroupQuestions.slice();
+      answersVisible = true;
+
+      // Sync toggle button UI (in case previous modal left it in other state)
+      const tBtn = document.getElementById('answers-toggle-btn');
+      const tTxt = document.getElementById('toggle-text');
+      if (tBtn && tTxt) {
+        tTxt.textContent = 'Hisha ibisubizo';
+        const tIcon = tBtn.querySelector('i');
+        if (tIcon) tIcon.className = 'fa-solid fa-eye-slash';
+      }
+
+      const meta = groupMeta[gi] || groupMeta[0];
+
+      // Header
+      document.getElementById('modal-icon').innerHTML = `<i class="fa-solid ${meta.icon} text-white"></i>`;
+      document.getElementById('modal-icon').className = `w-9 h-9 sm:w-10 sm:h-10 rounded-2xl flex items-center justify-center text-lg sm:text-xl flex-shrink-0 ${meta.bg}`;
+      document.getElementById('modal-title').innerHTML = `Ikizamini cya ${gi + 1} — ${meta.focus}`;
+      document.getElementById('modal-subtitle').innerHTML = `ibibazo ${currentGroupQuestions.length} • ${meta.diff} • ${meta.time}`;
+
+      const container = document.getElementById('modal-questions-container');
+      container.innerHTML = '';
+      renderQuestionsInModal(currentGroupFiltered);
+
+      // Show
+      const modal = document.getElementById('isuzuma-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+
+      markGroupViewed(gi);
+      filterAndRenderGroups(); // refresh progress in grid
+
+      // Persist so reload brings user back to exact same ibibazo
+      saveModalState();
+
+      // Save scroll position as user reads (debounced)
+      const qCont = document.getElementById('modal-questions-container');
+      if (qCont) {
+        qCont.onscroll = () => {
+          if (_scrollSaveTimer) clearTimeout(_scrollSaveTimer);
+          _scrollSaveTimer = setTimeout(() => saveModalState(), 350);
+        };
+      }
+    }
+
+    function renderQuestionsInModal(list) {
+      const container = document.getElementById('modal-questions-container');
+      if (!container) return;
+      container.innerHTML = '';
+
+      if (!list.length) {
+        container.innerHTML = `<div class="p-8 text-center text-slate-400">Ntabibazo byabonetse.</div>`;
+        return;
+      }
+
+      list.forEach((q, idx) => {
+        const num = idx + 1;
+        const ansIndex = q.answer;
+        const ansLetter = ['A','B','C','D'][ansIndex] || '?';
+
+        let opts = '';
+        q.options.forEach((opt, i) => {
+          const isC = i === ansIndex;
+          const cls = isC && answersVisible ? 'correct' : '';
+          opts += `
+            <div class="q-option ${cls}">
+              <span class="inline-block w-5 h-5 flex-shrink-0 mt-px text-[10px] font-extrabold border rounded-md flex items-center justify-center ${isC && answersVisible ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-900' : 'border-slate-300 dark:border-slate-600'}">${String.fromCharCode(65 + i)}</span>
+              <span class="flex-1 pt-px">${escapeHtml(opt)}</span>
+              ${isC && answersVisible ? '<i class="fa-solid fa-check text-emerald-600 ml-auto"></i>' : ''}
+            </div>`;
+        });
+
+        const card = document.createElement('div');
+        card.className = `ibibazo-q-card ${answersVisible ? '' : 'bg-white dark:bg-slate-900'}`;
+
+        // Image support restored (professional sign images like before)
+        const imageId = q.id || (idx + 1);
+        const imageHTML = `
+          <div class="sign-image-wrap mt-3 mb-3 rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden bg-slate-100 dark:bg-slate-800" style="display:none">
+            <img src="signs/${imageId}.jpg" 
+                 onerror="this.onerror=null; this.src='signs/${imageId}.png'; if(this.src.endsWith('.png') && this.naturalWidth===0) this.closest('.sign-image-wrap').style.display='none';"
+                 onload="this.closest('.sign-image-wrap').style.display='block'"
+                 class="w-full max-h-56 object-contain bg-white dark:bg-slate-950" alt="Ikimenyetso">
+          </div>`;
+
+        card.innerHTML = `
+          <div class="flex gap-3">
+            <div class="q-num-badge">${num}</div>
+            <div class="flex-1 min-w-0">
+              <div class="font-semibold text-[14.5px] leading-snug pr-2 mb-1">${escapeHtml(q.question)}</div>
+              ${imageHTML}
+              <div class="space-y-0.5">${opts}</div>
+              ${answersVisible ? `<div class="text-[11px] mt-2 font-semibold text-emerald-600">Igisubizo: ${ansLetter}</div>` : ''}
+            </div>
+          </div>`;
+        container.appendChild(card);
+      });
+    }
+
+    function toggleAnswersVisibility() {
+      answersVisible = !answersVisible;
+      const btn = document.getElementById('answers-toggle-btn');
+      const txt = document.getElementById('toggle-text');
+      if (btn && txt) {
+        txt.textContent = answersVisible ? 'Hisha ibisubizo' : 'Erekana ibisubizo';
+        btn.querySelector('i').className = answersVisible ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye';
+      }
+      renderQuestionsInModal(currentGroupFiltered);
+      saveModalState();
+    }
+
+    function pickRandomInCurrent() {
+      if (!currentGroupFiltered.length) return;
+      const idx = Math.floor(Math.random() * currentGroupFiltered.length);
+      const cards = document.querySelectorAll('#modal-questions-container > div');
+      if (cards[idx]) {
+        cards[idx].scrollIntoView({ behavior: 'smooth', block: 'center' });
+        cards[idx].style.transition = 'all .2s';
+        cards[idx].style.boxShadow = '0 0 0 3px rgb(16 185 129 / 0.35)';
+        setTimeout(() => { cards[idx].style.boxShadow = ''; }, 1400);
+      }
+    }
+
+    function markGroupComplete() {
+      if (currentGroupIndex >= 0) {
+        setGroupComplete(currentGroupIndex);
+      }
+      closeIsuzumaModal();
+      filterAndRenderGroups();
+    }
+
+    function closeIsuzumaModal() {
+      clearModalState();
+      const modal = document.getElementById('isuzuma-modal');
+      modal.classList.remove('flex');
+      modal.classList.add('hidden');
+      const c = document.getElementById('modal-questions-container');
+      if (c) c.innerHTML = '';
+      if (currentGroupIndex >= 0) {
+        markGroupViewed(currentGroupIndex);
+        filterAndRenderGroups();
+      }
+    }
+
+    // === Restore last opened ibibazo modal across page reloads ===
+    const MODAL_STATE_KEY = 'roadRulesIbibazoOpenModal';
+    let _scrollSaveTimer = null;
+
+    function saveModalState(extra = {}) {
+      if (currentGroupIndex < 0) return;
+      const cont = document.getElementById('modal-questions-container');
+      const state = {
+        gi: currentGroupIndex,
+        answersVisible: !!answersVisible,
+        scrollTop: cont ? cont.scrollTop : 0,
+        ts: Date.now(),
+        ...extra
+      };
+      try { localStorage.setItem(MODAL_STATE_KEY, JSON.stringify(state)); } catch (e) {}
+    }
+
+    function clearModalState() {
+      try { localStorage.removeItem(MODAL_STATE_KEY); } catch (e) {}
+    }
+
+    function restoreModalIfNeeded() {
+      try {
+        const raw = localStorage.getItem(MODAL_STATE_KEY);
+        if (!raw) return;
+        const saved = JSON.parse(raw);
+        if (!saved || typeof saved.gi !== 'number' || !isuzumaGroups[saved.gi]) {
+          clearModalState();
+          return;
+        }
+        setTimeout(() => {
+          openIsuzumaPro(saved.gi);
+          if (saved.answersVisible === false) {
+            answersVisible = false;
+            renderQuestionsInModal(currentGroupFiltered);
+            const btn = document.getElementById('answers-toggle-btn');
+            const txt = document.getElementById('toggle-text');
+            if (btn && txt) {
+              txt.textContent = 'Erekana ibisubizo';
+              const ic = btn.querySelector('i');
+              if (ic) ic.className = 'fa-solid fa-eye';
+            }
+          }
+          setTimeout(() => {
+            const cont = document.getElementById('modal-questions-container');
+            if (cont && typeof saved.scrollTop === 'number' && saved.scrollTop > 10) {
+              cont.scrollTop = saved.scrollTop;
+            }
+          }, 80);
+        }, 130);
+      } catch (e) { clearModalState(); }
+    }
+
+    function showLockedGroupPrompt(num) {
+      const msg = document.createElement('div');
+      msg.className = `fixed inset-0 z-[99] flex items-center justify-center bg-black/75 p-4`;
+      
+      const isWeekly = num < 6;
+      const requiredPlan = isWeekly ? 'inshuro5' : 'ukwezi';
+      const requiredPrice = isWeekly ? 500 : 1000;
+      const requiredName = isWeekly ? 'Icyumweru' : 'Ukwezi';
+      const desc = isWeekly 
+        ? "Gufungura iki kizamini bisaba kuba ufite ifatabuguzi ry'icyumweru."
+        : "Gufungura iki kizamini bisaba kuba ufite ifatabuguzi ry'ukwezi.";
+
+      msg.innerHTML = `
+        <div onclick="event.target===this&&this.remove()" class="absolute inset-0"></div>
+        <div class="relative bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-3xl shadow-2xl p-6 max-w-[340px] w-full">
+          <div class="text-center">
+            <div class="mx-auto w-16 h-16 rounded-2xl bg-amber-100 dark:bg-amber-900/60 flex items-center justify-center mb-4">
+              <i class="fa-solid fa-lock text-4xl text-amber-600 dark:text-amber-400"></i>
+            </div>
+            <div class="font-semibold text-xl tracking-tight">Ikizamini cya ${num} kirafunze</div>
+            <div class="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-400">${desc}</div>
+          </div>
+          
+          <div class="mt-6 flex gap-3">
+            <button class="flex-1 py-2.5 rounded-2xl border border-slate-300 dark:border-slate-600 text-sm font-semibold hover:bg-slate-50 dark:hover:bg-slate-800 transition" 
+                    onclick="this.closest('.fixed').remove()">Funga</button>
+            <button class="flex-1 py-2.5 rounded-2xl bg-gradient-to-r from-amber-500 to-orange-500 text-white text-sm font-semibold flex items-center justify-center gap-2 hover:brightness-105 active:scale-[0.985] transition" 
+                    onclick="this.closest('.fixed').remove(); startUpgradeFromIbibazo(${num}, '${requiredPlan}', ${requiredPrice}, '${requiredName}')">Fungura iki kizamini</button>
+          </div>
+          
+          <!-- Hint box -->
+          <div class="mt-4 flex items-center justify-center gap-2 rounded-2xl bg-emerald-50 dark:bg-emerald-900/30 border border-emerald-100 dark:border-emerald-800 px-3 py-1.5">
+            <i class="fa-solid fa-check-double text-emerald-500 text-xs"></i>
+            <span class="text-[10px] font-medium text-emerald-700 dark:text-emerald-300">Ifatabuguzi ry'ukwezi rifungura ibizamini byose</span>
+          </div>
+        </div>`;
+      document.body.appendChild(msg);
+    }
+
+    // Helper to go to ifitabuguzi and preselect the correct paid plan + jump to payment step
+    function startUpgradeFromIbibazo(num, planId, price, planName) {
+      try {
+        localStorage.setItem('roadRulesUpgradeFromIbibazo', JSON.stringify({
+          plan: { id: planId, price: price, name: planName },
+          step: 2,
+          ts: Date.now()
+        }));
+      } catch(e){}
+      window.location.href = 'ifitabuguzi.html';
+    }
+
+    function escapeHtml(str) {
+      return String(str).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m] || m));
+    }
+
+    function initIbibazoPro() {
+      initGroupMeta();
+      buildIsuzumaGroups();
+
+      // Initial stats
+      const qCount = document.getElementById('total-q-stat');
+      if (qCount) qCount.textContent = (window.RoadRulesQuestions || []).length;
+
+      // Render cards
+      renderIsuzumaProGrid();
+
+      // Initial progress
+      updateGlobalProgress();
+
+      // Wire filters default
+      const allChip = document.getElementById('filter-all');
+      if (allChip) allChip.classList.add('active');
+
+      // Hook into auth changes to refresh locked state
+      if (window.RoadRulesAuth && window.RoadRulesAuth.updateAuthUI) {
+        const orig = window.RoadRulesAuth.updateAuthUI;
+        window.RoadRulesAuth.updateAuthUI = function() {
+          if (orig) orig();
+          filterAndRenderGroups();
+        };
+      }
+
+      // Keyboard nice-to-have
+      document.addEventListener('keydown', function(e) {
+        if (e.key === '/' && document.activeElement.tagName === 'BODY') {
+          const s = document.getElementById('group-search');
+          if (s) { e.preventDefault(); s.focus(); }
+        }
+      });
+
+      // Restore any ibibazo modal that was open before reload (brings user back exactly where they were)
+      restoreModalIfNeeded();
+
+      console.log('%c[ibibazo] Professional redesigned UI ready — 20 iconized premium cards', 'color:#10b981');
+    }
+
+    function initializeApp() {
+      initTailwind();
+      initTheme();
+      initAccessibility();
+      initIbibazoPro();
+    }
+    window.onload = initializeApp;
+
+    // Extra safety: save current position if user reloads while modal is open
+    window.addEventListener('beforeunload', function() {
+      const m = document.getElementById('isuzuma-modal');
+      if (m && !m.classList.contains('hidden') && currentGroupIndex >= 0) {
+        saveModalState();
+      }
+    });
+  </script>
+</body>
+</html>
