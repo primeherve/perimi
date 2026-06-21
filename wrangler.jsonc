@@ -1,0 +1,17 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "perimi",
+  "compatibility_date": "2026-06-21",
+  "observability": {
+    "enabled": true
+  },
+  "assets": {
+    "directory": ".",
+    "ignore": [
+      "node_modules/**"
+    ]
+  },
+  "compatibility_flags": [
+    "nodejs_compat"
+  ]
+}
